@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+.animate-fadeIn {
+  animation: fadeIn 2s ease-out;
+}
+
+
+.animate-slideUp {
+  animation: slideUp 2s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease-out;
+}
+
+
+.font-orbitron {
+  font-family: "Orbitron", sans-serif;
+}
+
+.font-oxanium {
+  font-family: "Oxanium", sans-serif;
+}
+
+.font-rajdhani {
+  font-family: "Rajdhani", sans-serif;
+}
+
+/* === CLEAN UI === */
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.font-space {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* === CODE / TERMINAL === */
+.font-jetbrains {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.font-sharetech {
+  font-family: "Share Tech Mono", monospace;
+}
