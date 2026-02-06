@@ -72,7 +72,7 @@ function AiResumeEditor() {
 
   return (<>
    <div className="bg-black overflow-y-hidden">
-    <header className="w-full  backdrop-blur-3xl bg-amber-50/5 sticky top-0 z-30">
+    <header className="w-full  backdrop-blur-3xl sticky top-0 z-30">
       <div className="mx-auto flex items-center justify-between px-4 py-3 md:py-4">
        
         <div className="flex items-center gap-2">
@@ -99,7 +99,7 @@ function AiResumeEditor() {
     </header>
  
     <div className="min-h-screen  p-6">
-      <div className=" mx-auto rounded-2xl shadow-xl p-8 outline-2 outline-white ">
+      <div className=" mx-auto rounded-2xl shadow-xl p-8">
 
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white">
@@ -119,7 +119,7 @@ function AiResumeEditor() {
             </h3>
             <div
               readOnly
-              className="w-full  overflow-y-auto h-96 border rounded-xl p-4 text-sm bg-amber-50"
+              className="w-full font-inter  overflow-y-auto h-96 border rounded-xl p-4 text-sm bg-white"
             >{originalText}</div>
           </div>
 
@@ -130,7 +130,7 @@ function AiResumeEditor() {
             <div
               onChange={(e) => setEditedText(e.target.value)}
               placeholder="Click 'Improve with AI' to generate"
-              className="  overflow-y-auto outline-none bg-amber-50 h-96 border rounded-xl p-4 text-sm"
+              className="  overflow-y-auto font-inter outline-none bg-white h-96 border rounded-xl p-4 text-sm"
             >{editedText}</div>
           </div>
         </div>

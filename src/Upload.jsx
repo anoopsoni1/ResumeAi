@@ -3,14 +3,14 @@ import { Upload, FileText, Loader2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setResumeText } from "./slice/Resume.slice";
 import { FaFileMedical } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link , NavLink} from "react-router-dom";
 import { motion } from "framer-motion";
 
 
-const fade = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.6 } },
-};
+// const fade = {
+//   hidden: { opacity: 0 },
+//   visible: { opacity: 1, transition: { duration: 0.6 } },
+// };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -81,67 +81,73 @@ function Payal() {
     if (fileInputRef.current) fileInputRef.current.play();
   }, [fileInputRef]);
 
-  return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={fade}
-      className="bg-linear-to-br from-emerald-50 to-blue-50 min-h-screen"
-    >
-      <motion.header
-        variants={fadeUp}
-        className="w-full sticky top-0 z-30 backdrop-blur-md"
-      >
+  return ( 
+    <>
+      <header className="sticky top-0 z-30 backdrop-blur-xl bg-black">
         <div className="mx-auto flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 flex items-center justify-center rounded-full bg-indigo-600">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-600">
               <FaFileMedical className="text-white" />
             </div>
-            <span className="text-lg font-semibold text-black">
+            <span className="text-lg font-semibold text-white">
               RESUME AI
             </span>
           </div>
- 
-    <div>
-      <ul className="flex gap-8 text-[15px] text-black ">
-        <Link to="/">Home</Link>
-        <Link  to="/dashboard">Dashboard</Link>
-        <Link  to="/price">Price</Link>
-      </ul>
-    </div>
   
-          <div className="flex gap-3">
-            {user ? (
-              <Link className="rounded-full text-white bg-red-500 px-4 py-2 font-semibold">
-                Logout
+          <nav className="hidden md:flex gap-8 text-white">
+            {[
+              { to: "/", label: "Home" },
+              { to: "/dashboard", label: "Dashboard" },
+              { to: "/price", label: "Price" },
+              { to: "/about", label: "About" },
+            ].map(({ to, label }) => (
+              <NavLink
+                key={label}
+                to={to}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-orange-500 font-semibold"
+                    : "hover:text-orange-500"
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+  
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="rounded-full bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700"
+            >
+              Logout
+            </button>
+          ) : (
+            <div className="flex gap-3">
+              <Link
+                to="/login"
+                className="rounded-full bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
+              >
+                Sign In
               </Link>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="rounded-full bg-indigo-600 px-4 py-2 font-semibold"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  to="/register"
-                  className="rounded-full bg-indigo-600 px-4 py-2 font-semibold"
-                >
-                  Get Started
-                </Link>
-              </>
-            )}
-          </div>
+              <Link
+                to="/register"
+                className="rounded-full bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
+              >
+                Get Started
+              </Link>
+            </div>
+          )}
         </div>
-      </motion.header>
+      </header>
 
-      <div className="h-[90vh] flex items-center justify-center px-4">
+      <div className="h-[90vh] bg-black flex items-center justify-center px-4">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="w-full max-w-2xl rounded-2xl bg-white/70 backdrop-blur-xl shadow-xl p-8"
+          className="w-full max-w-2xl rounded-2xl bg-blue-100 backdrop-blur-xl shadow-xl p-8"
         >
           <div className="text-center mb-8">
             <div className="mx-auto mb-4 h-14 w-14 flex items-center justify-center rounded-xl bg-indigo-600 text-white">
@@ -268,7 +274,7 @@ function Payal() {
         </div>
       </div>
     </footer>
-    </motion.div>
+    </>
   );
 }
 
@@ -277,6 +283,9 @@ export default Payal;
 
 function FeatureSection() {
   return (
+    <div className="bg-black">
+
+  
     <motion.div
       variants={stagger}
       initial="hidden"
@@ -284,7 +293,7 @@ function FeatureSection() {
       viewport={{ once: true }}
       className="flex flex-col lg:flex-row gap-14 items-center px-8 py-20"
     >
-      <motion.div variants={fadeUp} className="rounded-3xl p-4 bg-indigo-500/10">
+      <motion.div variants={fadeUp} className="rounded-3xl p-4 bg-black">
         <video
           muted
           autoPlay
@@ -295,7 +304,7 @@ function FeatureSection() {
       </motion.div>
 
       <motion.div className="max-w-xl">
-        <motion.h1 variants={fadeUp} className="text-4xl font-bold mb-6">
+        <motion.h1 variants={fadeUp} className="text-4xl text-white font-bold mb-6">
           Made for students, professionals, and job seekers to land interviews
           faster.
         </motion.h1>
@@ -310,11 +319,12 @@ function FeatureSection() {
             <h2 className="text-lg font-semibold text-indigo-400 mb-2">
               {f.title}
             </h2>
-            <p className="text-gray-600">{f.desc}</p>
+            <p className="text-white">{f.desc}</p>
           </motion.div>
         ))}
       </motion.div>
     </motion.div>
+      </div>
   );
 }
 

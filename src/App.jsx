@@ -6,11 +6,15 @@ import { clearUser } from "./slice/user.slice";
 import axios from "axios";
 import LiquidEther from "./LiquidEther";
 import TextType from './TextType';
+import {useState , useEffect} from "react"
+// import Lightning from "./FloatingLines.jsx" 
+import Lightning from "./Lighting.jsx";
 
 function Navbar() {
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   const handlelogout = async () => {
     try {
@@ -74,12 +78,6 @@ function Navbar() {
             >
               Sign In
             </Link>
-            <Link
-              to="/register"
-              className="rounded-full bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
-            >
-              Get Started
-            </Link>
           </div>
         )}
       </div>
@@ -131,10 +129,28 @@ function Footer() {
 
 
 function Home() {
+ const [size, setSize] = useState({
+  width: window.innerWidth,
+  height: window.innerHeight,
+});
+
+useEffect(() => {
+  const handleResize = () => {
+    setSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
-
-      <div className="absolute inset-0 z-0 pointer-events-none">
+  
+{size.width>= 768 ? (<>
+  <div className="absolute inset-0 z-0 pointer-events-none">
         <LiquidEther
           colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
           mouseForce={50}
@@ -156,8 +172,22 @@ function Home() {
           color2="#B19EEF"
         />
       </div>
+</>
+) : (<>
+  <div className="absolute inset-0 z-0 pointer-events-none">
+    <Lightning
+      hue={260}
+      xOffset={0}
+      speed={0.8}
+      intensity={1.8}
+      size={1.2}
+    />
+  </div>
+</>)}
 
-      <div className="absolute inset-0 bg-black/40 z-1" />
+    
+
+      <div className={`absolute inset-0 z-1 ${size.width >= 768 ? 'bg-black/40' : 'bg-black/30'}`} />
 
  
       <div className="relative z-10">
